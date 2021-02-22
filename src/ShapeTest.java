@@ -18,6 +18,12 @@ public class ShapeTest {
     private Shape z;
     private Shape o;
 
+    private Shape shape_1;
+    private Shape shape_2;
+    private Shape shape_3;
+    private Shape shape_5;
+    private Shape shape_6;
+
     @BeforeClass
     public static void init() {
         shapes = Shape.getShapes();
@@ -25,13 +31,18 @@ public class ShapeTest {
 
     @Before
     public void setUp() {
-        t = new Shape(Shape.T_STR);
-        l = new Shape(Shape.L_STR);
-        j = new Shape(Shape.J_STR);
-        s = new Shape(Shape.S_STR);
-        i = new Shape(Shape.I_STR);
-        z = new Shape(Shape.Z_STR);
-        o = new Shape(Shape.O_STR);
+        i=new Shape("0 0  0 1  0 2  0 3");
+        l=new Shape("0 0  0 1  0 2  1 0");
+        j=new Shape("0 0  1 0  1 1  1 2");
+        s=new Shape("0 0  1 0  1 1  2 1");
+        z=new Shape("0 1  1 1  1 0  2 0");
+        o=new Shape("0 0  0 1  1 0  1 1");
+        t=new Shape("0 0  1 0  1 1  2 0");
+        shape_1=new Shape("0 0");
+        shape_2=new Shape("0 0  1 1");
+        shape_3=new Shape("0 0  1 1  2 1");
+        shape_5=new Shape("0 0  1 1  2 1  1 2  1 0");
+        shape_6=new Shape("0 1  1 1  2 1  1 2  1 0  1 3");
     }
 
     @Ignore
@@ -65,21 +76,17 @@ public class ShapeTest {
         assertEquals(6, points.length);
         assertEquals(3, t2.getPoints().length);
 
-        Shape myI = new Shape("0 0  0 1  0 2  0 3");
-        Shape myL = new Shape("0 0  0 1  0 2  1 0");
-        Shape myJ = new Shape("0 0  1 0  1 1  1 2");
-        Shape myS = new Shape("0 0  1 0  1 1  2 1");
-        Shape myZ = new Shape("0 1  1 1  1 0  2 0");
-        Shape myO = new Shape("0 0  0 1  1 0  1 1");
-        Shape myT = new Shape("0 0  1 0  1 1  2 0");
+        assertEquals(1,shape_1.getWidth());
+        assertEquals(2,shape_2.getWidth());
+        assertEquals(3,shape_3.getWidth());
+        assertEquals(3,shape_5.getWidth());
+        assertEquals(3,shape_6.getWidth());
 
-        assertEquals(i, myI);
-        assertEquals(l, myL);
-        assertEquals(j, myJ);
-        assertEquals(s, myS);
-        assertEquals(z, myZ);
-        assertEquals(o, myO);
-        assertEquals(t, myT);
+        assertEquals(1,shape_1.getHeight());
+        assertEquals(2,shape_2.getHeight());
+        assertEquals(2,shape_3.getHeight());
+        assertEquals(3,shape_5.getHeight());
+        assertEquals(4,shape_6.getHeight());
     }
 
     @Test(timeout = 100)
