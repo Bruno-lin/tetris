@@ -9,6 +9,7 @@ import static org.junit.Assert.*;
 
 public class ShapeTest {
     private static Shape[] shapes;
+
     private Shape t;
     private Shape l;
     private Shape j;
@@ -50,8 +51,8 @@ public class ShapeTest {
         Shape j1 = new Shape("1 0  2 0  2 1  2 2  2 3");
 
         Point[] j1Points = j1.getPoints();
-        assertTrue(Arrays.asList(j1Points).contains(new Point(2, 0)));
         assertTrue(Arrays.asList(j1Points).contains(new Point(1, 0)));
+        assertTrue(Arrays.asList(j1Points).contains(new Point(2, 0)));
         assertTrue(Arrays.asList(j1Points).contains(new Point(2, 1)));
         assertTrue(Arrays.asList(j1Points).contains(new Point(2, 2)));
         assertTrue(Arrays.asList(j1Points).contains(new Point(2, 3)));
@@ -136,45 +137,30 @@ public class ShapeTest {
     @Test(timeout = 100)
     public void makeFastRotationsTest() {
 
-        for (Shape t : shapes) {
-            Shape t2 = t.fastRotation();
-            Shape t3 = t2.fastRotation();
-            Shape t4 = t3.fastRotation();
-            Shape t5 = t4.fastRotation();
-            assertTrue(t == t5);
+        assertNotNull(shapes);
+
+        for (Shape shape : shapes) {
+            Shape next = shape.fastRotation();
+            assertNotNull(next);
+            if (o.equals(shape)) {
+                assertSame(shape, next);
+                continue;
+            }
+
+            next = next.fastRotation();
+            assertNotNull(next);
+            if (i.equals(shape) || s.equals(shape) || z.equals(shape)) {
+                assertSame(shape, next);
+                continue;
+            }
+
+            next = next.fastRotation();
+            assertNotNull(next);
+            assertNotEquals(shape, next);
+
+            next = next.fastRotation();
+            assertNotNull(next);
+            assertSame(shape, next);
         }
-
-
-        Shape t1 = shapes[2];
-        assertEquals(t1, t);
-
-        Shape t2 = t1.fastRotation();
-        Shape t3 = t2.fastRotation();
-        Shape t4 = t3.fastRotation();
-        Shape t5 = t4.fastRotation();
-
-        assertNotNull(t2);
-        assertNotNull(t3);
-        assertNotNull(t4);
-        assertNotNull(t5);
-        assertNotEquals(t, t2);
-        assertNotEquals(t, t3);
-        assertNotEquals(t, t4);
-
-        Shape o1 = shapes[6];
-        Shape o2 = o1.fastRotation();
-        assertEquals(o1, o2);
-        assertTrue(o1 == o2);
-
-        Shape s1 = shapes[3];
-        Shape s2 = s1.fastRotation();
-        Shape s3 = s2.fastRotation();
-        assertSame(s1,s3);
-
-        Shape l1 = shapes[2];
-        Shape l2 = l1.fastRotation();
-        Shape l3 = l2.fastRotation();
-        assertNotEquals(l1, l2);
-        assertTrue(l1 == l3);
     }
 }
