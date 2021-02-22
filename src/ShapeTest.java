@@ -48,73 +48,81 @@ public class ShapeTest {
 
     @Test(timeout = 100)
     public void shapeTest() {
-        Shape j1 = new Shape("1 0  2 0  2 1  2 2  2 3");
-        Shape j2 = new Shape("2 0  2 1  2 2");
+        Shape t1 = new Shape("1 5  2 4  3 3  4 2  1 2  3 2");
+        Shape t2 = new Shape("1 5  2 4  3 3");
 
-        Point[] j1Points = j1.getPoints();
-        assertTrue(Arrays.asList(j1Points).contains(new Point(1, 0)));
-        assertTrue(Arrays.asList(j1Points).contains(new Point(2, 0)));
-        assertTrue(Arrays.asList(j1Points).contains(new Point(2, 1)));
-        assertTrue(Arrays.asList(j1Points).contains(new Point(2, 2)));
-        assertTrue(Arrays.asList(j1Points).contains(new Point(2, 3)));
+        Point[] points = t1.getPoints();
+        assertTrue(Arrays.asList(points).contains(new Point(1, 5)));
+        assertTrue(Arrays.asList(points).contains(new Point(2, 4)));
+        assertTrue(Arrays.asList(points).contains(new Point(3, 3)));
+        assertTrue(Arrays.asList(points).contains(new Point(4, 2)));
+        assertTrue(Arrays.asList(points).contains(new Point(1, 2)));
+        assertTrue(Arrays.asList(points).contains(new Point(3, 2)));
 
-        assertEquals(5, j1Points.length);
-        assertEquals(2, j1.getWidth());
-        assertEquals(4, j1.getHeight());
+        assertEquals(5, t1.getWidth());
+        assertEquals(6, t1.getHeight());
 
-        assertEquals(3, j2.getPoints().length);
+        assertEquals(6, points.length);
+        assertEquals(3, t2.getPoints().length);
 
-        assertEquals(3, t.getWidth());
-        assertEquals(2, l.getWidth());
-        assertEquals(2, j.getWidth());
-        assertEquals(3, s.getWidth());
-        assertEquals(1, i.getWidth());
-        assertEquals(3, z.getWidth());
-        assertEquals(2, o.getWidth());
+        Shape myI = new Shape("0 0  0 1  0 2  0 3");
+        Shape myL = new Shape("0 0  0 1  0 2  1 0");
+        Shape myJ = new Shape("0 0  1 0  1 1  1 2");
+        Shape myS = new Shape("0 0  1 0  1 1  2 1");
+        Shape myZ = new Shape("0 1  1 1  1 0  2 0");
+        Shape myO = new Shape("0 0  0 1  1 0  1 1");
+        Shape myT = new Shape("0 0  1 0  1 1  2 0");
 
-        assertEquals(2, t.getHeight());
-        assertEquals(3, l.getHeight());
-        assertEquals(3, j.getHeight());
-        assertEquals(2, s.getHeight());
-        assertEquals(4, i.getHeight());
-        assertEquals(2, z.getHeight());
-        assertEquals(2, o.getHeight());
-
+        assertEquals(i, myI);
+        assertEquals(l, myL);
+        assertEquals(j, myJ);
+        assertEquals(s, myS);
+        assertEquals(z, myZ);
+        assertEquals(o, myO);
+        assertEquals(t, myT);
     }
 
     @Test(timeout = 100)
     public void rotateCounterclockwiseTest() {
-        Shape j = shapes[2];
-        Shape j1 = j.rotateCounterclockwise();
-        Shape j2 = j1.rotateCounterclockwise();
-        Shape j3 = j2.rotateCounterclockwise();
-        Shape j4 = j3.rotateCounterclockwise();
+        for (Shape t : shapes) {
+            Shape t1 = t.rotateCounterclockwise();
+            Shape t2 = t1.rotateCounterclockwise();
+            Shape t3 = t2.rotateCounterclockwise();
+            Shape t4 = t3.rotateCounterclockwise();
+            Shape t5 = t4.rotateCounterclockwise();
 
-        assertNotNull(j1);
-        assertNotNull(j2);
-        assertNotNull(j3);
-        assertNotNull(j4);
+            assertEquals(t, t4);
+            assertEquals(t5, t1);
+        }
 
-        assertNotSame(j1, j);
-        assertNotSame(j2, j);
-        assertNotSame(j3, j);
-        assertSame(j4, j);
+        Shape t1 = t.rotateCounterclockwise();
+        Point[] points = t1.getPoints();
+        assertEquals(4, points.length);
+        assertTrue(Arrays.asList(points).contains(new Point(0, 1)));
+        assertTrue(Arrays.asList(points).contains(new Point(1, 0)));
+        assertTrue(Arrays.asList(points).contains(new Point(1, 1)));
+        assertTrue(Arrays.asList(points).contains(new Point(1, 2)));
 
-        Point[] j1Points = j1.getPoints();
-        assertTrue(Arrays.asList(j1Points).contains(new Point(0, 1)));
-        assertTrue(Arrays.asList(j1Points).contains(new Point(1, 1)));
-        assertTrue(Arrays.asList(j1Points).contains(new Point(2, 1)));
-        assertTrue(Arrays.asList(j1Points).contains(new Point(2, 0)));
+        Shape o1 = o.rotateCounterclockwise();
+        Shape o2 = o1.rotateCounterclockwise();
+        Shape o3 = o2.rotateCounterclockwise();
+        assertEquals(o1, o);
+        assertEquals(o2, o);
+        assertEquals(o3, o);
+
+        Shape s1 = s.rotateCounterclockwise();
+        Shape s2 = s1.rotateCounterclockwise();
+        assertEquals(s2, s);
 
         Shape diy = new Shape("0 0  1 0  1 1  2 0  2 1");
         Shape diy2 = diy.rotateCounterclockwise();
-        Point[] diy2Points = diy2.getPoints();
-        assertEquals(5, diy2Points.length);
-        assertTrue(Arrays.asList(diy2Points).contains(new Point(0, 1)));
-        assertTrue(Arrays.asList(diy2Points).contains(new Point(0, 2)));
-        assertTrue(Arrays.asList(diy2Points).contains(new Point(1, 0)));
-        assertTrue(Arrays.asList(diy2Points).contains(new Point(1, 1)));
-        assertTrue(Arrays.asList(diy2Points).contains(new Point(1, 2)));
+        points = diy2.getPoints();
+        assertEquals(5, points.length);
+        assertTrue(Arrays.asList(points).contains(new Point(0, 1)));
+        assertTrue(Arrays.asList(points).contains(new Point(0, 2)));
+        assertTrue(Arrays.asList(points).contains(new Point(1, 0)));
+        assertTrue(Arrays.asList(points).contains(new Point(1, 1)));
+        assertTrue(Arrays.asList(points).contains(new Point(1, 2)));
     }
 
     @Test(timeout = 100)
