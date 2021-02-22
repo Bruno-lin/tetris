@@ -19,8 +19,6 @@ public class Shape {
      */
     public Shape(Point[] points) {
         // TODO
-        width = 4;
-        height = 4;
         this.points = points;
     }
 
