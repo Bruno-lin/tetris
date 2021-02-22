@@ -49,6 +49,7 @@ public class ShapeTest {
     @Test(timeout = 100)
     public void shapeTest() {
         Shape j1 = new Shape("1 0  2 0  2 1  2 2  2 3");
+        Shape j2 = new Shape("2 0  2 1  2 2");
 
         Point[] j1Points = j1.getPoints();
         assertTrue(Arrays.asList(j1Points).contains(new Point(1, 0)));
@@ -57,9 +58,11 @@ public class ShapeTest {
         assertTrue(Arrays.asList(j1Points).contains(new Point(2, 2)));
         assertTrue(Arrays.asList(j1Points).contains(new Point(2, 3)));
 
-        assertEquals(5, j1.getPoints().length);
+        assertEquals(5, j1Points.length);
         assertEquals(2, j1.getWidth());
         assertEquals(4, j1.getHeight());
+
+        assertEquals(3, j2.getPoints().length);
 
         assertEquals(3, t.getWidth());
         assertEquals(2, l.getWidth());
