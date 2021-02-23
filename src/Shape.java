@@ -72,7 +72,7 @@ public class Shape {
         Shape beforeRotation = root;
         Shape afterRotation = root.next;
 
-        while (afterRotation != beforeRotation) {
+        while (!afterRotation.equals(root)) {
             beforeRotation = afterRotation;
             afterRotation = beforeRotation.rotateCounterclockwise();
         }
