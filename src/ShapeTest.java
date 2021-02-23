@@ -204,7 +204,7 @@ public class ShapeTest {
 
             next = next.fastRotation();
             assertNotNull(next);
-            assertNotSame(shape, next);
+            assertNotEquals(shape, next);
 
             next = next.fastRotation();
             assertNotNull(next);
