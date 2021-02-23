@@ -26,10 +26,10 @@ public class Shape {
      */
     public Shape(Point[] points) {
         // TODO
-        this.points = points;
         // 计算宽度，高度
         width = Arrays.stream(points).map(i -> i.x).max(Integer::compareTo).get() + 1;
         height = Arrays.stream(points).map(i -> i.y).max(Integer::compareTo).get() + 1;
+        this.points = points;
     }
 
 
@@ -153,15 +153,14 @@ public class Shape {
      * 检查两个形状是否完全相同。
      * 注意：同一个形状的不同旋转角度，应该返回false。
      */
+    @Override
     public boolean equals(Object other) {
         // TODO
         if (this == other) return true;
         if (other == null || this.getClass() != other.getClass()) return false;
 
-        Shape shape_to_compare = (Shape)other;
-        return this.getPoints().length==shape_to_compare.getPoints().length &&
+        Shape shape_to_compare = (Shape) other;
+        return this.getPoints().length == shape_to_compare.getPoints().length &&
                 List.of(this.getPoints()).containsAll(List.of(shape_to_compare.getPoints()));
     }
-
-
 }
