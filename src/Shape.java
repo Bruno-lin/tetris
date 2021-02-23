@@ -25,7 +25,6 @@ public class Shape {
      * 以Point数组作为参数的构造函数
      */
     public Shape(Point[] points) {
-        // TODO
         // 计算宽度，高度
         width = Arrays.stream(points).map(i -> i.x).max(Integer::compareTo).get() + 1;
         height = Arrays.stream(points).map(i -> i.y).max(Integer::compareTo).get() + 1;
@@ -67,7 +66,6 @@ public class Shape {
      * 注意：不同形状旋转后的角度数量不一样，例如O型只有一种角度
      */
     private static Shape makeFastRotations(Shape root) {
-        // TODO
         Shape beforeRotation = root;
         Shape afterRotation = root.rotateCounterclockwise();
 
@@ -76,7 +74,7 @@ public class Shape {
             beforeRotation = afterRotation;
             afterRotation = beforeRotation.rotateCounterclockwise();
         }
-        root= beforeRotation.next;
+        root = beforeRotation.next;
         return root;
     }
 
@@ -129,7 +127,6 @@ public class Shape {
      * 注意：该方法不应改变当前形状，而应返回一个新形状
      */
     public Shape rotateCounterclockwise() {
-        // TODO
         Point[] rotated_shape = new Point[points.length];
 
         for (int i = 0; i < points.length; i++) {
@@ -156,7 +153,6 @@ public class Shape {
      */
     @Override
     public boolean equals(Object other) {
-        // TODO
         if (this == other) return true;
         if (other == null || this.getClass() != other.getClass()) return false;
 
