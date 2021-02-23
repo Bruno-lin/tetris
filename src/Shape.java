@@ -66,15 +66,21 @@ public class Shape {
      * 注意：不同形状旋转后的角度数量不一样，例如O型只有一种角度
      */
     private static Shape makeFastRotations(Shape root) {
-        Shape beforeRotation = root;
-        Shape afterRotation = root.rotateCounterclockwise();
-
-        while (!afterRotation.equals(root)) {
-            beforeRotation.next = afterRotation;
-            beforeRotation = afterRotation;
-            afterRotation = beforeRotation.rotateCounterclockwise();
+        root.next = root.rotateCounterclockwise();
+        if (root.equals(root.next)) // O
+        {
+            root.next = root;
+            return root;
         }
-        root = beforeRotation.next;
+        root.next.next = root.next.rotateCounterclockwise();
+        if (root.equals(root.next.next)) // I S Z
+        {
+            root.next.next = root;
+            return root;
+        }
+        // L J T
+        root.next.next.next = root.next.next.rotateCounterclockwise();
+        root.next.next.next.next = root;
         return root;
     }
 
