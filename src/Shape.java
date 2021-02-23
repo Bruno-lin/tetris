@@ -68,15 +68,16 @@ public class Shape {
      */
     private static Shape makeFastRotations(Shape root) {
         // TODO
-        root.next = root.rotateCounterclockwise();
         Shape beforeRotation = root;
         Shape afterRotation = root.next;
 
         while (!afterRotation.equals(root)) {
+            beforeRotation.next = afterRotation;
             beforeRotation = afterRotation;
             afterRotation = beforeRotation.rotateCounterclockwise();
         }
-        return afterRotation;
+        root= beforeRotation.next;
+        return root;
     }
 
     /**
