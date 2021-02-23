@@ -69,7 +69,7 @@ public class Shape {
     private static Shape makeFastRotations(Shape root) {
         // TODO
         Shape beforeRotation = root;
-        Shape afterRotation = root.next;
+        Shape afterRotation = root.rotateCounterclockwise();
 
         while (!afterRotation.equals(root)) {
             beforeRotation.next = afterRotation;
