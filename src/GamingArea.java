@@ -218,9 +218,9 @@ public class GamingArea {
             }
         }
         // 后移动
-        for (int row = height - 1; row >= 0; row--) {
-            if (delRows[row] == 1) {
-                for (int move_down_y = row; move_down_y < height - 1; move_down_y++) {
+        for (int area_y = height - 1; area_y >= 0; area_y--) {
+            if (delRows[area_y] == 1) {
+                for (int move_down_y = area_y; move_down_y < height - 1; move_down_y++) {
                     for (int move_down_x = 0; move_down_x < width; move_down_x++) {
                         board_cache[move_down_x][move_down_y] = board_cache[move_down_x][move_down_y + 1];
                     }
