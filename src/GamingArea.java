@@ -218,9 +218,9 @@ public class GamingArea {
             }
         }
         // 后移动
-        for (int area_y = height - 1; area_y >= 0; area_y--) {
-            if (delRows[area_y] == 1) {
-                for (int move_down_y = area_y; move_down_y < height - 1; move_down_y++) {
+        for (int row = height - 1; row >= 0; row--) {
+            if (delRows[row] == 1) {
+                for (int move_down_y = row; move_down_y < height - 1; move_down_y++) {
                     for (int move_down_x = 0; move_down_x < width; move_down_x++) {
                         board_cache[move_down_x][move_down_y] = board_cache[move_down_x][move_down_y + 1];
                     }
@@ -266,27 +266,27 @@ public class GamingArea {
         Point[] points_temp = new Point[points.length];
 
         //找出形状最小的x轴
-        boolean seen = false;
-        int result = 0;
+        boolean seen_x = false;
+        int result_z = 0;
         for (Point point1 : points) {
             int x = point1.x;
-            if (!seen || x < result) {
-                seen = true;
-                result = x;
+            if (!seen_x || x < result_z) {
+                seen_x = true;
+                result_z = x;
             }
         }
-        int x_min = seen ? result : 0;
+        int x_min = seen_x ? result_z : 0;
         //找出形状最小的x轴
-        boolean seen1 = false;
-        int result_1 = 0;
+        boolean seen_y = false;
+        int result_y = 0;
         for (Point point : points) {
             int y = point.y;
-            if (!seen1 || y < result_1) {
-                seen1 = true;
-                result_1 = y;
+            if (!seen_y || y < result_y) {
+                seen_y = true;
+                result_y = y;
             }
         }
-        int y_min = seen1 ? result_1 : 0;
+        int y_min = seen_y ? result_y : 0;
 
         //算出在当前游戏区域里的(x,y)坐标，并返回
         for (int i = 0; i < points.length; i++) {
