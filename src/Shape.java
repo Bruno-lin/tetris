@@ -26,8 +26,12 @@ public class Shape {
      */
     public Shape(Point[] points) {
         // 计算宽度，高度
-        width = Arrays.stream(points).map(i -> i.x).max(Integer::compareTo).get() + 1;
-        height = Arrays.stream(points).map(i -> i.y).max(Integer::compareTo).get() + 1;
+        int x_min = Arrays.stream(points).map(point -> point.x).mapToInt(x -> x).min().orElse(0);
+        int x_max = Arrays.stream(points).map(point -> point.x).mapToInt(x -> x).max().orElse(0);
+        width = x_max - x_min + 1;
+        int y_min = Arrays.stream(points).map(point -> point.y).mapToInt(x -> x).min().orElse(0);
+        int y_max = Arrays.stream(points).map(point -> point.y).mapToInt(x -> x).max().orElse(0);
+        height = y_max - y_min + 1;
         this.points = points;
     }
 
@@ -50,12 +54,12 @@ public class Shape {
         if (Shape.shapes == null) {
             Shape.shapes = new Shape[]{
                     makeFastRotations(new Shape(I_STR)),
-                    makeFastRotations(new Shape(L_STR)),
-                    makeFastRotations(new Shape(J_STR)),
-                    makeFastRotations(new Shape(S_STR)),
-                    makeFastRotations(new Shape(Z_STR)),
+//                    makeFastRotations(new Shape(L_STR)),
+//                    makeFastRotations(new Shape(J_STR)),
+//                    makeFastRotations(new Shape(S_STR)),
+//                    makeFastRotations(new Shape(Z_STR)),
                     makeFastRotations(new Shape(O_STR)),
-                    makeFastRotations(new Shape(T_STR)),
+//                    makeFastRotations(new Shape(T_STR)),
             };
         }
         return Shape.shapes;
@@ -67,14 +71,12 @@ public class Shape {
      */
     private static Shape makeFastRotations(Shape root) {
         root.next = root.rotateCounterclockwise();
-        if (root.equals(root.next)) // O
-        {
+        if (root.equals(root.next)) { // O 形状
             root.next = root;
             return root;
         }
         root.next.next = root.next.rotateCounterclockwise();
-        if (root.equals(root.next.next)) // I S Z
-        {
+        if (root.equals(root.next.next)) { // I S Z
             root.next.next = root;
             return root;
         }
