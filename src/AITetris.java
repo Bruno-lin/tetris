@@ -3,7 +3,7 @@ import java.util.Random;
 
 public class AITetris extends Tetris implements AI {
 
-    protected JCheckBox debugButton;
+     JCheckBox debugButton;
 
     AITetris(int pixels) {
         super(pixels);
