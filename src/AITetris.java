@@ -24,11 +24,24 @@ public class AITetris extends Tetris implements AI {
 
     @Override
     public void startGame() {
+        count = 0;
+        score = 0;
+        gameOn = true;
         random = new Random();  // 用于让形状随机出现
         if (debugButton.isSelected()) {
             random.setSeed(0);
         }
-        super.startGame();
+        startTime = System.currentTimeMillis();
+        timer.start();
+
+
+        gamingArea = new GamingArea(WIDTH, HEIGHT + TOP_SPACE);
+        updateCounters();
+        toggleButtons();
+        timeLabel.setText(" ");
+        addNewShape();
+
+        repaint();
     }
 
     @Override
