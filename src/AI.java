@@ -48,6 +48,5 @@ public interface AI {
             bestMove.score = bestScore;
             return bestMove;
         }
-
     }
 }

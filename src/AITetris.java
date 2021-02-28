@@ -3,7 +3,7 @@ import java.util.Random;
 
 public class AITetris extends Tetris implements AI {
 
-     JCheckBox debugButton;
+    JCheckBox debugButton;
 
     AITetris(int pixels) {
         super(pixels);
@@ -65,5 +65,23 @@ public class AITetris extends Tetris implements AI {
                 currentShape = move.shape;
             }
         }
+    }
+
+    @Override
+    public Shape pickNextShape() {
+        super.pickNextShape();
+        Shape AI_pick = shapes[0];
+        int best_score = 0;
+        for (Shape shape : shapes) {
+            gamingArea.undo();
+            Move move = calculateBestMove(gamingArea, shape);
+            if(move == null){
+                return shape;
+            }else if (move.score > best_score){
+                best_score = (int)move.score;
+                AI_pick = shape;
+            }
+        }
+        return AI_pick;
     }
 }
