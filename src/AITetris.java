@@ -3,7 +3,7 @@ import java.util.Random;
 
 public class AITetris extends Tetris implements AI {
 
-    JCheckBox debugButton = new JCheckBox();
+    protected JCheckBox debugButton;
 
     AITetris(int pixels) {
         super(pixels);
@@ -16,9 +16,18 @@ public class AITetris extends Tetris implements AI {
         } catch (Exception ignored) {
         }
 
-        Tetris tetris = new Tetris(16);
+        Tetris tetris = new AITetris(16);
         JFrame frame = createFrame(tetris);
         frame.setVisible(true);
+    }
+
+    @Override
+    public void startGame() {
+        random = new Random();  // 用于让形状随机出现
+        if (debugButton.isSelected()) {
+            random.setSeed(0);
+        }
+        super.startGame();
     }
 
     @Override
@@ -47,15 +56,5 @@ public class AITetris extends Tetris implements AI {
                 score = (int) move.score;
             }
         }
-    }
-
-    @Override
-    public void startGame() {
-
-        random = new Random();  // 用于让形状随机出现
-        if (debugButton.isSelected()) {
-            random.setSeed(0);
-        }
-        super.startGame();
     }
 }
