@@ -14,6 +14,7 @@ public class AITetris extends Tetris implements AI {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception ignored) {
+
         }
 
         Tetris tetris = new AITetris(16);
@@ -45,15 +46,10 @@ public class AITetris extends Tetris implements AI {
             gamingArea.undo();
             Move move = calculateBestMove(gamingArea, currentShape);
             if (move != null) {
-                if (move.x > newX) {
-                    super.tick(RIGHT);
-                } else if (move.x < newX) {
-                    super.tick(LEFT);
-                } else {
-                    super.tick(direction);
-                }
-                currentShape = move.shape;
                 score = (int) move.score;
+                currentX = move.x;
+                currentY = move.y;
+                currentShape = move.shape;
             }
         }
     }
