@@ -27,10 +27,11 @@ public class AITetris extends Tetris implements AI {
         count = 0;
         score = 0;
         gameOn = true;
-        random = new Random();  // 用于让形状随机出现
+
         if (debugButton.isSelected()) {
             random.setSeed(0);
-        }
+        }else random = new Random();
+
         startTime = System.currentTimeMillis();
         timer.start();
 
