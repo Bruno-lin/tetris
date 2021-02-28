@@ -1,3 +1,5 @@
+import java.util.function.Function;
+
 public interface AI {
     class Move {
         public int x;
@@ -7,7 +9,7 @@ public interface AI {
     }
 
     // 这个人工智能其实是个人工智障，不过用来说明问题已经足够了
-    default public Move calculateBestMove(GamingArea gamingArea, Shape shape) {
+    default Move calculateBestMove(GamingArea gamingArea, Shape shape) {
         // 计算最佳旋转
         if(shape.getHeight() > shape.fastRotation().getHeight()) {
             shape = shape.fastRotation();
@@ -46,5 +48,6 @@ public interface AI {
             bestMove.score = bestScore;
             return bestMove;
         }
+
     }
 }

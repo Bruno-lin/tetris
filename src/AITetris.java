@@ -1,10 +1,22 @@
+import javax.swing.*;
+import java.util.Random;
+
 public class AITetris extends Tetris implements AI {
 
-//    JCheckBox debug
+    JCheckBox debugButton = new JCheckBox();
 
     AITetris(int pixels) {
         super(pixels);
     }
+
+    @Override
+    public JPanel createControlPanel() {
+        JPanel panel = super.createControlPanel();
+        debugButton = new JCheckBox("Debug", false);
+        panel.add(debugButton);
+        return panel;
+    }
+
 
     @Override
     public void tick(int direction) {
@@ -23,6 +35,15 @@ public class AITetris extends Tetris implements AI {
                 currentShape = move.shape;
                 score = (int) move.score;
             }
+        }
+    }
+
+    @Override
+    public void startGame() {
+        super.startGame();
+        random = new Random();  // 用于让形状随机出现
+        if (debugButton.isSelected()) {
+            random.setSeed(0);
         }
     }
 }
