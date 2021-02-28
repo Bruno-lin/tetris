@@ -9,6 +9,18 @@ public class AITetris extends Tetris implements AI {
         super(pixels);
     }
 
+    public static void main(String[] args) {
+        // boilerplate code
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception ignored) {
+        }
+
+        Tetris tetris = new Tetris(16);
+        JFrame frame = createFrame(tetris);
+        frame.setVisible(true);
+    }
+
     @Override
     public JPanel createControlPanel() {
         JPanel panel = super.createControlPanel();
@@ -16,7 +28,6 @@ public class AITetris extends Tetris implements AI {
         panel.add(debugButton);
         return panel;
     }
-
 
     @Override
     public void tick(int direction) {
@@ -40,10 +51,11 @@ public class AITetris extends Tetris implements AI {
 
     @Override
     public void startGame() {
-        super.startGame();
+
         random = new Random();  // 用于让形状随机出现
         if (debugButton.isSelected()) {
             random.setSeed(0);
         }
+        super.startGame();
     }
 }
