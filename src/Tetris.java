@@ -206,27 +206,18 @@ public class Tetris extends JComponent {
         newX = currentX;
         newY = currentY;
 
+        // 使旋转围绕中心而不是边缘
         switch (direction) {
-            case LEFT:
-                newX--;
-                break;
-            case RIGHT:
-                newX++;
-                break;
-            case ROTATE:
+            case LEFT -> newX--;
+            case RIGHT -> newX++;
+            case ROTATE -> {
                 newShape = newShape.fastRotation();
-                // 使旋转围绕中心而不是边缘
                 newX = newX + (currentShape.getWidth() - newShape.getWidth()) / 2;
                 newY = newY + (currentShape.getHeight() - newShape.getHeight()) / 2;
-                break;
-            case DOWN:
-                newY--;
-                break;
-            case DROP:
-                newY = gamingArea.getDropHeight(newShape, newX);
-                break;
-            default:
-                throw new RuntimeException("方向错误");
+            }
+            case DOWN -> newY--;
+            case DROP -> newY = gamingArea.getDropHeight(newShape, newX);
+            default -> throw new RuntimeException("方向错误");
         }
 
     }
@@ -310,20 +301,11 @@ public class Tetris extends JComponent {
             // 消3行 - 20分
             // 消4行 - 40分
             switch (cleared) {
-                case 1:
-                    score += 5;
-                    break;
-                case 2:
-                    score += 10;
-                    break;
-                case 3:
-                    score += 20;
-                    break;
-                case 4:
-                    score += 40;
-                    break;
-                default:
-                    throw new RuntimeException("到底想消几行？你咋不上天呢？");
+                case 1 -> score += 5;
+                case 2 -> score += 10;
+                case 3 -> score += 20;
+                case 4 -> score += 40;
+                default -> throw new RuntimeException("到底想消几行？你咋不上天呢？");
             }
             updateCounters();
             repaint();

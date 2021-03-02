@@ -55,15 +55,14 @@ public interface AI {
     // 在每一列中尝试放置当前图形
     default void tryPlace(GamingArea gamingArea, Shape shape, Map<Double, Move> moveMap) {
         for (int col = 0; col < gamingArea.getAreaWidth() - shape.getWidth() + 1; col++) {// 尝试每一个位置
-            int x = col;
-            int y = gamingArea.getDropHeight(shape, x);
+            int y = gamingArea.getDropHeight(shape, col);
             Move move = new Move();
-            move.x = x;
+            move.x = col;
             move.y = y;
             move.shape = shape;
 
             gamingArea.undo();
-            int result = gamingArea.place(shape, x, y);
+            int result = gamingArea.place(shape, col, y);
             if (result <= GamingArea.ROW_FULL) { // 放置成功
                 // 方块放置之后的高度
                 int landingHeight = gamingArea.getColumnHeight(col) + (shape.getHeight() + 1) / 2;
@@ -150,7 +149,7 @@ public interface AI {
             }
             Bumpiness.add(num);
         }
-        return Bumpiness.stream().mapToInt(num -> sumX(num)).sum();
+        return Bumpiness.stream().mapToInt(this::sumX).sum();
     }
 
     //累加
