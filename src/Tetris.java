@@ -431,7 +431,7 @@ public class Tetris extends JComponent {
         timeLabel = new JLabel(" ");
         panel.add(timeLabel);
 
-        panel.add(Box.createVerticalStrut(20));             // 空白间隔
+        panel.add(Box.createVerticalStrut(10));             // 空白间隔
 
         startButton = new JButton("开始");
         startButton.addActionListener(e -> startGame());
@@ -442,7 +442,7 @@ public class Tetris extends JComponent {
         panel.add(stopButton);
         toggleButtons();
 
-        panel.add(Box.createVerticalStrut(20));
+        panel.add(Box.createVerticalStrut(10));
 
         speedSlider = new JSlider(0, 200, 100);
         speedSlider.setPreferredSize(new Dimension(100, 15));
@@ -450,7 +450,7 @@ public class Tetris extends JComponent {
         updateTimer();
         panel.add(speedSlider);
 
-        panel.add(Box.createVerticalStrut(12));
+        panel.add(Box.createVerticalStrut(10));
 
         quitButton = new JButton("退出");
         quitButton.addActionListener(e -> System.exit(0));
