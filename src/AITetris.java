@@ -53,7 +53,6 @@ public class AITetris extends Tetris implements AI {
 
         normalButton.addActionListener(e ->
                 pickShapeFunction = this::pickNormalShape);
-        normalButton.doClick(); //默认正常模式
 
         difficultButton.addActionListener(e ->
                 pickShapeFunction = this::pickDifficultShape);
